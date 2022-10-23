@@ -1,26 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+// Make sure to import the component we just built:
+import ColorBlock from './colorBlock.js'
+import ColorForm from './colorForm.js'
 
-function App() {
+function App(){
+  const addColor = (newColor) => {
+    setColors([...colors, newColor])
+}
+
+let [colors, setColors] = useState([
+    'violet', 'blue',
+    'lightblue', 'green',
+    'greenyellow', 'yellow',
+    'orange', 'red'
+])
+    
+  let colorMap = colors.map((color, i) => {
+      return (
+          <ColorBlock key={i} color={color} />
+      )
+})
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>It is working</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className="App">
+          <div>
+            {colorMap}
+          </div>
+          <ColorForm addColor={addColor} />
+      </div>
+  )
 }
 
 export default App;
